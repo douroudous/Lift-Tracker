@@ -1,0 +1,32 @@
+<%= form_with(model: lift_workout, local: true) do |form| %>
+  <% if lift_workout.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(lift_workout.errors.count, "error") %> prohibited this lift_workout from being saved:</h2>
+
+      <ul>
+        <% lift_workout.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :weight %>
+    <%= form.number_field :weight %>
+  </div>
+
+  <div class="field">
+    <%= form.label :workout_id %>
+    <%= form.text_field :workout_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lift_id %>
+    <%= form.text_field :lift_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
