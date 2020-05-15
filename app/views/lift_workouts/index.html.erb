@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Lift Workouts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Weight</th>
+      <th>Workout</th>
+      <th>Lift</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lift_workouts.each do |lift_workout| %>
+      <tr>
+        <td><%= lift_workout.weight %></td>
+        <td><%= lift_workout.workout_id %></td>
+        <td><%= lift_workout.lift_id %></td>
+        <td><%= link_to 'Show', lift_workout %></td>
+        <td><%= link_to 'Edit', edit_lift_workout_path(lift_workout) %></td>
+        <td><%= link_to 'Destroy', lift_workout, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Lift Workout', new_lift_workout_path %>
