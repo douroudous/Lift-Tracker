@@ -12,6 +12,17 @@
   <% end %>
 
   <div class="field">
+    <% @workout.lift_workouts.each do |lift_workout| %>
+      <div>Lift Name: <%= lift_workout.lift.name %> -
+        Lift Weight: <%= lift_workout.weight %></div>
+        <% lift_workout.lift_sets.each do |set| %>
+          <div><%= set.rep_count %></div>
+
+        <% end %>
+    <% end %>
+  </div>
+
+  <div class="field">
     <%= form.label :body_weight %>
     <%= form.number_field :body_weight %>
   </div>
