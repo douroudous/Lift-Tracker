@@ -1,3 +1,5 @@
+<%= javascript_pack_tag "workouts/index_page" %>
+
 <p id="notice"><%= notice %></p>
 
 <h1>Workouts</h1>
@@ -23,6 +25,21 @@
     <% end %>
   </tbody>
 </table>
+
+<div class="container-fluid">
+  <div class="row flex-row flex-nowrap">
+    <% @workouts.each do |workout| %>
+      <div class="col-5 p-0">
+        <div class="card card-block">
+          <div class="display-4"><%= workout.workout_date.strftime("%A") %></div>
+          <div class="h1"><%= workout.workout_date.strftime("%d %b") %></div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div>
 
 <br>
 
