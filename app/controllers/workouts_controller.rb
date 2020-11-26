@@ -1,25 +1,20 @@
 class WorkoutsController < ApplicationController
   before_action :set_workout, only: [:show, :edit, :update, :destroy]
 
-  # GET /workouts
   def index
     @workouts = Workout.order(workout_date: :desc)
   end
 
-  # GET /workouts/1
   def show
   end
 
-  # GET /workouts/new
   def new
     @workout = Workout.new
   end
 
-  # GET /workouts/1/edit
   def edit
   end
 
-  # POST /workouts
   def create
     @workout = Workout.new(workout_params)
 
@@ -30,7 +25,6 @@ class WorkoutsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /workouts/1
   def update
     if @workout.update(workout_params)
       redirect_to @workout, notice: 'Workout was successfully updated.'
@@ -39,7 +33,6 @@ class WorkoutsController < ApplicationController
     end
   end
 
-  # DELETE /workouts/1
   def destroy
     @workout.destroy
     redirect_to workouts_url, notice: 'Workout was successfully destroyed.'
