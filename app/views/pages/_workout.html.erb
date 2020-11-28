@@ -1,8 +1,8 @@
 <div class="d-flex row">
   <div class="card col">
     <div class="card-body py-5">
-      <h5 class="mb-3"><%= workout.workout_date.strftime("%a") %></h5>
-      <h6 class="mb-3"><%= workout.workout_date.strftime("%d %b") %></h6>
+      <h5 class="mb-3"><%= workout_date_day(workout.workout_date) %></h5>
+      <h6 class="mb-3"><%= workout_date_short(workout.workout_date) %></h6>
       <%= link_to 'Edit', edit_workout_path(workout) %>
     </div>
   </div>
