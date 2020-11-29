@@ -13,6 +13,10 @@ class LiftWorkout < ApplicationRecord
     lift_sets.pluck(:rep_count).join('/')
   end
 
+  def lift_set_list
+    Array.new(5) { |i| lift_sets[i] }
+  end
+
   private
 
   def lift_set_count
