@@ -10,18 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_25_160132) do
+ActiveRecord::Schema.define(version: 2020_05_25_160044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "lift_sets", force: :cascade do |t|
-    t.integer "rep_count", null: false
-    t.bigint "lift_workout_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["lift_workout_id"], name: "index_lift_sets_on_lift_workout_id"
-  end
 
   create_table "lift_workouts", force: :cascade do |t|
     t.integer "weight"
@@ -47,7 +39,6 @@ ActiveRecord::Schema.define(version: 2020_05_25_160132) do
     t.index ["workout_date"], name: "index_workouts_on_workout_date", unique: true
   end
 
-  add_foreign_key "lift_sets", "lift_workouts"
   add_foreign_key "lift_workouts", "lifts"
   add_foreign_key "lift_workouts", "workouts"
 end
