@@ -4,6 +4,6 @@
     <h2 class="float-right d-inline-block"><%= lift_workout.formatted_weight %></h2>
   </div>
   <div class="row">
-    <%#= render partial: 'lift_set_card', collection: lift_workout.lift_set_list, as: :set, locals: { form: form }%>
+    <%= render partial: 'set_card', collection: lift_workout.rep_count, as: :set, locals: { form: form }%>
   </div>
 </div>
