@@ -10,6 +10,10 @@ class LiftWorkout < ApplicationRecord
     rep_count.join('/')
   end
 
+  def sized_list(size)
+    Array.new(size) { |i| rep_count[i] }
+  end
+
   private
 
 end
