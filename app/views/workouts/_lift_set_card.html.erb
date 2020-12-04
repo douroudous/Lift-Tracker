@@ -1,4 +1,4 @@
 <div class="col mx-2" id="lift_set_<%= set&.id %>">
   <button class="btn btn-primary w-100 rep_count_button" type="button"><%= set&.rep_count || '-' %></button>
-  <%= form.hidden_field :rep_count, :value => set&.rep_count %>
+  <%= hidden_field_tag "workout[lift_#{set&.lift_workout_id}][set_#{set&.id}]", '5' %>
 </div>

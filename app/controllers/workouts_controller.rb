@@ -16,7 +16,7 @@ class WorkoutsController < ApplicationController
   end
 
   def create
-    @workout = Workout.new(workout_params)
+    @workout = WorkoutService.create_new(workout_params)
 
     if @workout.save
       redirect_to @workout, notice: 'Workout was successfully created.'
@@ -26,7 +26,9 @@ class WorkoutsController < ApplicationController
   end
 
   def update
-    if @workout.update(workout_params)
+    updated = WorkoutService.update(@workout, workout_params)
+
+    if updated
       redirect_to @workout, notice: 'Workout was successfully updated.'
     else
       render :edit
