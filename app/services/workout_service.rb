@@ -4,7 +4,6 @@ class WorkoutService
   end
 
   def self.update(workout, params)
-    # binding.pry
     workout.update(build_params(params))
   end
 
@@ -22,12 +21,6 @@ class WorkoutService
     # update_params
 
     update_params = params
-
-    # ON FRIDAY
-    # Undo LiftSet work to minimize db hits
-    # REMOVE EVERYTHING TO DO WITH LIFT SETS
-    # Finish workout service
-    # review PR and merge
 
     update_params
   end
