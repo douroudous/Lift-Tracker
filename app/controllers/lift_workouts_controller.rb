@@ -1,25 +1,17 @@
 class LiftWorkoutsController < ApplicationController
   before_action :set_lift_workout, only: [:show, :edit, :update, :destroy]
 
-  # GET /lift_workouts
   def index
     @lift_workouts = LiftWorkout.all
   end
 
-  # GET /lift_workouts/1
-  def show
-  end
-
-  # GET /lift_workouts/new
   def new
     @lift_workout = LiftWorkout.new
   end
 
-  # GET /lift_workouts/1/edit
   def edit
   end
 
-  # POST /lift_workouts
   def create
     @lift_workout = LiftWorkout.new(lift_workout_params)
 
@@ -30,7 +22,6 @@ class LiftWorkoutsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /lift_workouts/1
   def update
     if @lift_workout.update(lift_workout_params)
       redirect_to @lift_workout, notice: 'Lift workout was successfully updated.'
@@ -39,7 +30,6 @@ class LiftWorkoutsController < ApplicationController
     end
   end
 
-  # DELETE /lift_workouts/1
   def destroy
     @lift_workout.destroy
     redirect_to lift_workouts_url, notice: 'Lift workout was successfully destroyed.'
