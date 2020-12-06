@@ -1,0 +1,37 @@
+<%= form_with(model: routine_lift, local: true) do |form| %>
+  <% if routine_lift.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(routine_lift.errors.count, "error") %> prohibited this routine_lift from being saved:</h2>
+
+      <ul>
+        <% routine_lift.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :rep_count %>
+    <%= form.number_field :rep_count %>
+  </div>
+
+  <div class="field">
+    <%= form.label :set_count %>
+    <%= form.number_field :set_count %>
+  </div>
+
+  <div class="field">
+    <%= form.label :routine_id %>
+    <%= form.text_field :routine_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lift_id %>
+    <%= form.text_field :lift_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,4 +1,5 @@
 class Workout < ApplicationRecord
+  belongs_to :routine, optional: true
   has_many :lift_workouts
 
   def rep_count_input
