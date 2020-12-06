@@ -16,21 +16,13 @@ WorkoutFormHandler.prototype = {
         const input = document.querySelector('#workout_rep_counts');
         const inputArray = JSON.parse(input.value);
 
-        const determineRepCount = (repCount) => {
-          if (isNaN(repCount)) {
-            return max;
-          } else if (repCount === '0') {
-            return '-';
-          }
+        const repCount = (reps) => {
+          return isNaN(reps) ? max : reps === '0' ? '-' : parseInt(reps) - 1;
+        }
 
-          return parseInt(repCount) - 1;
-        };
-
-        inputArray.map((liftWorkout) => {
-          if (liftWorkout.lift_workout === parseInt(liftWorkoutId)) {
-            const newRepCount = determineRepCount(button.innerHTML);
-            button.innerHTML = newRepCount;
-            liftWorkout.reps[setId - 1] = newRepCount;
+        inputArray.map((lw) => {
+          if (lw.lift_workout === parseInt(liftWorkoutId)) {
+            lw.reps[setId - 1] = button.innerHTML = repCount(button.innerHTML);
           }
         });
 
