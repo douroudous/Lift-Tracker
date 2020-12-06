@@ -39,12 +39,10 @@ class LiftsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_lift
       @lift = Lift.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
     def lift_params
       params.require(:lift).permit(:name)
     end

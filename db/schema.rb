@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_04_183424) do
+ActiveRecord::Schema.define(version: 2020_12_06_204305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,14 +32,36 @@ ActiveRecord::Schema.define(version: 2020_12_04_183424) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "routine_lifts", force: :cascade do |t|
+    t.integer "rep_count", null: false
+    t.integer "set_count", null: false
+    t.bigint "routine_id", null: false
+    t.bigint "lift_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lift_id"], name: "index_routine_lifts_on_lift_id"
+    t.index ["routine_id"], name: "index_routine_lifts_on_routine_id"
+  end
+
+  create_table "routines", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "workouts", force: :cascade do |t|
     t.integer "body_weight", null: false
     t.date "workout_date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "routine_id"
+    t.index ["routine_id"], name: "index_workouts_on_routine_id"
     t.index ["workout_date"], name: "index_workouts_on_workout_date", unique: true
   end
 
   add_foreign_key "lift_workouts", "lifts"
   add_foreign_key "lift_workouts", "workouts"
+  add_foreign_key "routine_lifts", "lifts"
+  add_foreign_key "routine_lifts", "routines"
+  add_foreign_key "workouts", "routines"
 end

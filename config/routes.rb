@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :routine_lifts
+  resources :routines
   root 'pages#home'
   resources :workouts
   resources :lift_workouts

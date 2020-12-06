@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Routine Lifts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rep count</th>
+      <th>Set count</th>
+      <th>Routine</th>
+      <th>Lift</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @routine_lifts.each do |routine_lift| %>
+      <tr>
+        <td><%= routine_lift.rep_count %></td>
+        <td><%= routine_lift.set_count %></td>
+        <td><%= routine_lift.routine_id %></td>
+        <td><%= routine_lift.lift_id %></td>
+        <td><%= link_to 'Show', routine_lift %></td>
+        <td><%= link_to 'Edit', edit_routine_lift_path(routine_lift) %></td>
+        <td><%= link_to 'Destroy', routine_lift, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Routine Lift', new_routine_lift_path %>
