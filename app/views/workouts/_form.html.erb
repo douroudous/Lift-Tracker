@@ -11,12 +11,14 @@
     </div>
   <% end %>
 
-  <%= render partial: 'lift_workout_card', collection: @workout.lift_workouts, as: :lift_workout, locals: { form: form }%>
+  <%= render partial: 'lift_workout_card', collection: @workout.lift_workouts.order(id: :asc), as: :lift_workout, locals: { form: form }%>
 
   <div class="field">
     <%= form.label :body_weight %>
     <%= form.number_field :body_weight %>
   </div>
+
+  <%= hidden_field_tag "workout[rep_counts]", @workout.rep_count_input %>
 
   <div class="actions">
     <%= form.submit %>

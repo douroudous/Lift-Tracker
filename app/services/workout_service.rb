@@ -8,19 +8,18 @@ class WorkoutService
   end
 
   private_class_method def self.build_params(params)
-    # update_params = params.except(:photo_cloudinary_data)
-    # photo_params = params[:photo_cloudinary_data]
-    #
-    # update_params[:photo_id] =
-    #   if photo_params.present?
-    #     look_up_photo_id(JSON.parse(photo_params))
-    #   else
-    #     params[:photo_id]
-    #   end
-    #
-    # update_params
-
-    update_params = params
+    update_params = params.except(:rep_counts)
+    # REFACTOR THIS
+    rep_counts = JSON.parse(params[:rep_counts])
+    lift_workouts = LiftWorkout.where(id: rep_counts.map{ |r| r['lift_workout'] })
+    puts 'BEFORE'
+    lift_workouts.each do |lw|
+      reps = rep_counts.find{|r| r['lift_workout'] == lw.id }['reps']
+      puts 'mid a'
+      lw.update(rep_count: reps)
+      puts 'mid b'
+    end
+    puts 'AFTER'
 
     update_params
   end

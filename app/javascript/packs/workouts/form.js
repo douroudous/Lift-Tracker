@@ -10,19 +10,31 @@ WorkoutFormHandler.prototype = {
     document.querySelectorAll('.rep_count_button').forEach((b) => {
       b.addEventListener('click', (e) => {
         const button = e.target;
-        const input = e.target.nextElementSibling;
-        const max = 5;
+        const { setId, liftWorkoutId } = button.dataset;
+        const max = 5; // change later with dataset value
 
-        if (input.value === '') {
-          button.innerHTML = max;
-          input.value  = max;
-        } else if (input.value === '0') {
-          button.innerHTML = '-';
-          input.value = null;
-        } else {
-          button.innerHTML--;
-          input.value--;
-        }
+        const input = document.querySelector('#workout_rep_counts');
+        const inputArray = JSON.parse(input.value);
+
+        const determineRepCount = (repCount) => {
+          if (isNaN(repCount)) {
+            return max;
+          } else if (repCount === '0') {
+            return '-';
+          }
+
+          return parseInt(repCount) - 1;
+        };
+
+        inputArray.map((liftWorkout) => {
+          if (liftWorkout.lift_workout === parseInt(liftWorkoutId)) {
+            const newRepCount = determineRepCount(button.innerHTML);
+            button.innerHTML = newRepCount;
+            liftWorkout.reps[setId - 1] = newRepCount;
+          }
+        });
+
+        input.value = JSON.stringify(inputArray);
       });
     });
   },
