@@ -29,7 +29,7 @@ class WorkoutsController < ApplicationController
     updated = WorkoutService.update(@workout, workout_params)
 
     if updated
-      redirect_to @workout, notice: 'Workout was successfully updated.'
+      redirect_to edit_workout_url
     else
       render :edit
     end
