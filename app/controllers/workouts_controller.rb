@@ -1,15 +1,20 @@
 class WorkoutsController < ApplicationController
   before_action :set_workout, only: [:show, :edit, :update, :destroy]
+  before_action :routine_lifts, only: [:new]
+  before_action :new_rep_count_list, only: [:new]
+  before_action :rep_count_list, only: [:edit]
 
   def index
-    @workouts = Workout.order(workout_date: :desc)
+    @workouts = Workout.includes(
+      lift_workouts: :lift
+    ).order(workout_date: :desc)
   end
 
   def show
   end
 
   def new
-    @workout = Workout.new
+    @workout = Workout.new(routine_id: params[:routine])
   end
 
   def edit
@@ -47,7 +52,27 @@ class WorkoutsController < ApplicationController
       ).find(params[:id])
     end
 
+    def routine_lifts
+      @routine = Routine.includes(
+        routine_lifts: :lift
+      ).find_by_id(params[:routine])
+    end
+
+    def new_rep_count_list
+      @lift_workout_list = if @routine
+        # format hash
+        @routine.routine_lifts.order(:id)
+      else
+        []
+      end
+    end
+
+    def rep_count_list
+      # format hash
+      @lift_workout_list = @workout.lift_workouts.order(:id)
+    end
+
     def workout_params
-      params.require(:workout).permit(:body_weight, :rep_counts, :workout_date)
+      params.require(:workout).permit(:body_weight, :rep_counts, :workout_date, :routine_id)
     end
 end
