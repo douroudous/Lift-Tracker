@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <%= render partial: 'lift_workout_card', collection: @lift_workout_list, as: :lift_workout, locals: { form: form }%>
+  <%= render partial: 'lift_workout_card', collection: @workout.lift_workout_list, as: :lift_workout, locals: { form: form }%>
 
   <div class="field">
     <%= form.label :body_weight %>

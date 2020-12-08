@@ -1,8 +1,5 @@
 class WorkoutsController < ApplicationController
   before_action :set_workout, only: [:show, :edit, :update, :destroy]
-  before_action :routine_lifts, only: [:new]
-  before_action :new_rep_count_list, only: [:new]
-  before_action :rep_count_list, only: [:edit]
 
   def index
     @workouts = Workout.includes(
@@ -47,29 +44,7 @@ class WorkoutsController < ApplicationController
 
   private
     def set_workout
-      @workout = Workout.includes(
-        lift_workouts: :lift
-      ).find(params[:id])
-    end
-
-    def routine_lifts
-      @routine = Routine.includes(
-        routine_lifts: :lift
-      ).find_by_id(params[:routine])
-    end
-
-    def new_rep_count_list
-      @lift_workout_list = if @routine
-        # format hash
-        @routine.routine_lifts.order(:id)
-      else
-        []
-      end
-    end
-
-    def rep_count_list
-      # format hash
-      @lift_workout_list = @workout.lift_workouts.order(:id)
+      @workout = Workout.find(params[:id])
     end
 
     def workout_params
