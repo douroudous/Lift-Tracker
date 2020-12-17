@@ -2,7 +2,9 @@ class WorkoutsController < ApplicationController
   before_action :set_workout, only: [:show, :edit, :update, :destroy]
 
   def index
-    @workouts = Workout.order(workout_date: :desc)
+    @workouts = Workout.includes(
+      lift_workouts: :lift
+    ).order(workout_date: :desc)
   end
 
   def show
@@ -10,6 +12,7 @@ class WorkoutsController < ApplicationController
 
   def new
     @workout = Workout.new
+    @workout.lift_workouts.new
   end
 
   def edit
@@ -29,7 +32,7 @@ class WorkoutsController < ApplicationController
     updated = WorkoutService.update(@workout, workout_params)
 
     if updated
-      redirect_to @workout, notice: 'Workout was successfully updated.'
+      redirect_to edit_workout_url
     else
       render :edit
     end

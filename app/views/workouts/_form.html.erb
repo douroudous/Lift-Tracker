@@ -13,6 +13,13 @@
 
   <%= render partial: 'lift_workout_card', collection: @workout.lift_workouts.order(:id), as: :lift_workout, locals: { form: form }%>
 
+  <%= form.fields_for :lift_workouts do |lw| %>
+    <div class="form-group">
+      <%= lw.text_field :weight, placeholder: "Add lift_workout weight", rows: 10, class: "form-control" %>
+      <%= lw.text_field :rep_count, placeholder: "Add lift_workout reps", rows: 10, class: "form-control" %>
+    </div>
+  <% end %>
+
   <div class="field">
     <%= form.label :body_weight %>
     <%= form.number_field :body_weight %>
