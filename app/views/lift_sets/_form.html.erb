@@ -1,0 +1,27 @@
+<%= form_with(model: lift_set, local: true) do |form| %>
+  <% if lift_set.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(lift_set.errors.count, "error") %> prohibited this lift_set from being saved:</h2>
+
+      <ul>
+        <% lift_set.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :rep_count %>
+    <%= form.number_field :rep_count %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lift_workout_id %>
+    <%= form.text_field :lift_workout_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
