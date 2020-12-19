@@ -11,18 +11,18 @@
     </div>
   <% end %>
 
-  <%= render partial: 'lift_workout_card', collection: @workout.lift_workouts.order(:id), as: :lift_workout, locals: { form: form }%>
+  <%#= render partial: 'lift_workout_card', collection: @workout.lift_workouts.order(:id), as: :lift_workout, locals: { form: form }%>
 
   <%= form.fields_for :lift_workouts do |lw| %>
     <div class="form-group">
+      <%= lw.object.lift.name %>
       <%= lw.text_field :weight, placeholder: "Add lift_workout weight", rows: 10, class: "form-control" %>
       <%= lw.text_field :rep_count, placeholder: "Add lift_workout reps", rows: 10, class: "form-control" %>
     </div>
     <%= lw.fields_for :lift_sets do |ls| %>
-      <div class="form-group">
-        <%= ls.text_field :rep_count, placeholder: "Add lift_workout reps", rows: 10, class: "form-control" %>
-      </div>
+      <%= ls.text_field :rep_count, placeholder: "Add lift_workout reps", rows: 10, class: "form-control" %>
     <% end %>
+    <hr>
   <% end %>
 
   <div class="field">
@@ -30,8 +30,8 @@
     <%= form.number_field :body_weight %>
   </div>
 
-  <%= hidden_field_tag 'workout[rep_counts]', @workout.rep_count_input %>
-  <%= hidden_field_tag 'workout[workout_date]', @workout.workout_date || Date.today %>
+  <%#= hidden_field_tag 'workout[rep_counts]', @workout.rep_count_input %>
+  <%#= hidden_field_tag 'workout[workout_date]', @workout.workout_date || Date.today %>
 
   <div class="actions">
     <%= form.submit %>

@@ -1,11 +1,9 @@
 class LiftWorkout < ApplicationRecord
   belongs_to :workout
   belongs_to :lift
-  has_many :lift_sets
+  has_many :lift_sets, dependent: :destroy
 
   accepts_nested_attributes_for :lift_sets
-
-  validates_associated :lift_sets
 
   def formatted_weight
     "#{weight}lb" if weight

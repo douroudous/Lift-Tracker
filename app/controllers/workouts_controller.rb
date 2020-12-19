@@ -29,9 +29,7 @@ class WorkoutsController < ApplicationController
   end
 
   def update
-    updated = WorkoutService.update(@workout, workout_params)
-
-    if updated
+    if @workout.update(workout_params)
       redirect_to edit_workout_url
     else
       render :edit
@@ -46,11 +44,24 @@ class WorkoutsController < ApplicationController
   private
     def set_workout
       @workout = Workout.includes(
-        lift_workouts: :lift
+        lift_workouts: [:lift, :lift_sets]
       ).find(params[:id])
     end
 
     def workout_params
-      params.require(:workout).permit(:body_weight, :rep_counts, :workout_date)
+      params.require(:workout).permit(
+        :body_weight,
+        :rep_counts,
+        :workout_date,
+        :lift_workouts_attributes => [
+          :id,
+          :weight,
+          :rep_count,
+          :lift_sets_attributes => [
+            :id,
+            :rep_count
+          ]
+        ]
+      )
     end
 end
