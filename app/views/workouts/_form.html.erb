@@ -16,13 +16,15 @@
   <%= form.fields_for :lift_workouts do |lw| %>
     <div class="form-group">
       <%= lw.object.lift.name %>
-      <%= lw.text_field :weight, placeholder: "Add lift_workout weight", rows: 10, class: "form-control" %>
-      <%= lw.text_field :rep_count, placeholder: "Add lift_workout reps", rows: 10, class: "form-control" %>
+      <%= lw.number_field :weight, placeholder: "Add lift_workout weight", rows: 10, class: "form-control" %>
+      <div>
+        <%= lw.fields_for :lift_sets do |ls| %>
+          <button class="btn btn-primary rep_count_button" type="button"><%= ls.object.rep_count %></button>
+          <%= ls.hidden_field :rep_count, rows: 10, class: "form-control" %>
+        <% end %>
+      </div>
+      <hr>
     </div>
-    <%= lw.fields_for :lift_sets do |ls| %>
-      <%= ls.text_field :rep_count, placeholder: "Add lift_workout reps", rows: 10, class: "form-control" %>
-    <% end %>
-    <hr>
   <% end %>
 
   <div class="field">

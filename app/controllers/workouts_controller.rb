@@ -19,7 +19,7 @@ class WorkoutsController < ApplicationController
   end
 
   def create
-    @workout = WorkoutService.create_new(workout_params)
+    @workout = Workout.new(workout_params)
 
     if @workout.save
       redirect_to @workout, notice: 'Workout was successfully created.'
