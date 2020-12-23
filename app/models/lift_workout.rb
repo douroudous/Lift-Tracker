@@ -10,7 +10,7 @@ class LiftWorkout < ApplicationRecord
   end
 
   def formatted_reps
-    lift_sets.pluck(:rep_count).join('/')
+    lift_sets.map{|ls| ls.rep_count || '-' }.join('/')
   end
 
   private

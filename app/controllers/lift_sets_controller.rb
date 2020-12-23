@@ -5,9 +5,6 @@ class LiftSetsController < ApplicationController
     @lift_sets = LiftSet.all
   end
 
-  def show
-  end
-
   def new
     @lift_set = LiftSet.new
   end
