@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2020_12_18_192840) do
   enable_extension "plpgsql"
 
   create_table "lift_sets", force: :cascade do |t|
-    t.integer "rep_count", null: false
+    t.integer "rep_count"
     t.bigint "lift_workout_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

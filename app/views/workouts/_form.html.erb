@@ -13,15 +13,15 @@
     </div>
   <% end %>
 
-  <%= form.fields_for :lift_workouts, workout.lift_workouts.order(:created_at) do |lw| %>
+  <%= form.fields_for :lift_workouts do |lw| %>
     <div class="form-group">
       <%= lw.object&.lift&.name || 'Click to set lift' %>
       <%= lw.number_field :weight, placeholder: "Add lift_workout weight", class: "form-control" %>
       <%= lw.hidden_field :lift_id %>
       <div>
-        <%= lw.fields_for :lift_sets, lw.object.lift_sets.order(:created_at) do |ls| %>
+        <%= lw.fields_for :lift_sets do |ls| %>
           <button class="btn btn-primary rep_count_button" type="button"><%= ls.object.rep_count || '-' %></button>
-          <%= ls.hidden_field :rep_count, rows: 10, class: "form-control" %>
+          <%= ls.hidden_field :rep_count, class: "form-control" %>
         <% end %>
       </div>
       <hr>
@@ -33,7 +33,7 @@
     <%= form.number_field :body_weight %>
   </div>
 
-  <%= hidden_field_tag 'workout[workout_date]', @workout.workout_date || Date.today %>
+  <%= form.hidden_field :workout_date, value: @workout.workout_date || Date.today %>
 
   <div class="actions">
     <%= form.submit %>
