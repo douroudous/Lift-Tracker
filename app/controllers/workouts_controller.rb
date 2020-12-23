@@ -55,10 +55,11 @@ class WorkoutsController < ApplicationController
     end
 
     def build_workout_sets
-      # NEXT: fix this!!!
+      lift_ids = [46, 48, 50] # FIX EVENTUALLY
 
-      1.times do
-        @workout.lift_workouts.build(lift: Lift.last).lift_sets.build
+      lift_ids.each do |lift_id|
+        lift_workout = @workout.lift_workouts.build(lift_id: lift_id)
+        5.times { lift_workout.lift_sets.build }
       end
     end
 
