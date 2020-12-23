@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_18_192840) do
+ActiveRecord::Schema.define(version: 2020_12_23_180758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2020_12_18_192840) do
     t.bigint "lift_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.text "rep_count", default: [], array: true
+    t.integer "rep_count"
     t.index ["lift_id"], name: "index_lift_workouts_on_lift_id"
     t.index ["workout_id"], name: "index_lift_workouts_on_workout_id"
   end

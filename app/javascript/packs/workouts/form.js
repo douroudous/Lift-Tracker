@@ -12,12 +12,11 @@ WorkoutFormHandler.prototype = {
         const button = e.target;
         const reps = button.innerHTML;
         const input = button.nextElementSibling;
-        const max = 5; // change later
+        const max = button.parentElement.dataset.maxReps;
 
         if (isNaN(reps)) {
           button.innerHTML = input.value = max;
         } else if (reps === '0') {
-          // figure out how to deal with blank rep_count
           button.innerHTML = '-';
           input.value = null;
         } else {

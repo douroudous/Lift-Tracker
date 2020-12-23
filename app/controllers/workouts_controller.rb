@@ -14,7 +14,7 @@ class WorkoutsController < ApplicationController
   end
 
   def new
-    @workout = Workout.new
+    @workout = Workout.new(routine_id: params[:routine])
     build_workout_sets
   end
 
@@ -55,11 +55,13 @@ class WorkoutsController < ApplicationController
     end
 
     def build_workout_sets
-      lift_ids = [46, 48, 50] # FIX EVENTUALLY
-
-      lift_ids.each do |lift_id|
-        lift_workout = @workout.lift_workouts.build(lift_id: lift_id)
-        5.times { lift_workout.lift_sets.build }
+      @routine = @workout.routine
+      @routine&.routine_lifts&.each do |routine_lift|
+        lift_workout = @workout.lift_workouts.build(
+          lift_id: routine_lift.lift_id,
+          rep_count: routine_lift.rep_count
+        )
+        routine_lift.set_count.times { lift_workout.lift_sets.build }
       end
     end
 
