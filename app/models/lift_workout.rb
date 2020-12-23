@@ -10,11 +10,7 @@ class LiftWorkout < ApplicationRecord
   end
 
   def formatted_reps
-    rep_count.join('/')
-  end
-
-  def sized_list(size)
-    Array.new(size) { |i| rep_count[i] }
+    lift_sets.pluck(:rep_count).join('/')
   end
 
   private

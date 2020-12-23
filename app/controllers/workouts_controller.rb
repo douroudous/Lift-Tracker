@@ -3,7 +3,10 @@ class WorkoutsController < ApplicationController
 
   def index
     @workouts = Workout.includes(
-      lift_workouts: :lift
+      lift_workouts: [
+        :lift,
+        :lift_sets
+      ]
     ).order(workout_date: :desc)
   end
 
@@ -12,7 +15,7 @@ class WorkoutsController < ApplicationController
 
   def new
     @workout = Workout.new
-    @workout.lift_workouts.build.lift_sets.build
+    build_workout_sets
   end
 
   def edit
@@ -44,8 +47,19 @@ class WorkoutsController < ApplicationController
   private
     def set_workout
       @workout = Workout.includes(
-        lift_workouts: [:lift, :lift_sets]
+        lift_workouts: [
+          :lift,
+          :lift_sets
+        ]
       ).find(params[:id])
+    end
+
+    def build_workout_sets
+      # NEXT: fix this!!!
+
+      1.times do
+        @workout.lift_workouts.build(lift: Lift.last).lift_sets.build
+      end
     end
 
     def workout_params
@@ -57,6 +71,7 @@ class WorkoutsController < ApplicationController
           :id,
           :weight,
           :rep_count,
+          :lift_id,
           :lift_sets_attributes => [
             :id,
             :rep_count

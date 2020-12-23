@@ -14,8 +14,15 @@ WorkoutFormHandler.prototype = {
         const input = button.nextElementSibling;
         const max = 5; // change later
 
-        const newReps = isNaN(reps) ? max : reps === '0' ? '-' : parseInt(reps) - 1;
-        input.value = button.innerHTML = newReps;
+        if (isNaN(reps)) {
+          button.innerHTML = input.value = max;
+        } else if (reps === '0') {
+          // figure out how to deal with blank rep_count
+          button.innerHTML = '-';
+          input.value = null;
+        } else {
+          button.innerHTML = input.value = parseInt(reps) - 1;
+        }
       });
     });
   },
