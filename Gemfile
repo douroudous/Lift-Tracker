@@ -8,6 +8,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', '~> 5.x'
 gem 'bootstrap', '~> 4.0'
 gem 'jquery-rails'
+gem 'devise'
+
 group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'

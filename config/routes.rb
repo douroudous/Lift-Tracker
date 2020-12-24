@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :lift_sets
   resources :routine_lifts
   resources :routines

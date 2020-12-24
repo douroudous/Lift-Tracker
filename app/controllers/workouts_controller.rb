@@ -1,5 +1,6 @@
 class WorkoutsController < ApplicationController
   before_action :set_workout, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:index] # fix this
 
   def index
     @workouts = Workout.includes(
