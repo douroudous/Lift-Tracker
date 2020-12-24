@@ -25,7 +25,7 @@ class WorkoutsController < ApplicationController
     @workout = Workout.new(workout_params)
 
     if @workout.save
-      redirect_to @workout, notice: 'Workout was successfully created.'
+      redirect_to workouts_url
     else
       render :new
     end
@@ -51,7 +51,7 @@ class WorkoutsController < ApplicationController
           :lift,
           :lift_sets
         ]
-      ).find(params[:id])
+      ).order('lift_sets.created_at').find(params[:id])
     end
 
     def build_workout_sets
